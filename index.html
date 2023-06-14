@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DinoCalc 1.2 | by Bruce McMurtrie Jr</title>
+
+	<!-- jQuery JS CDN -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+	<!-- Bootstrap CSS CDN -->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+	<!-- DinoCalc CSS -->
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="jumbotron">
+				<div id="svg_dino"><img src="1x/svg_dino.png"></div>
+				<h1><span id="title">DinoCalc 1.2</span></h1>
+				<h4>by <a href="http://brucemcmurtrie.com/contact.html" target="_blank">Bruce McMurtrie Jr</a></h4>
+
+				<p>
+					<input type="button" onclick="createRow()" value="Create Row" />
+					<input type="button" onclick="deleteRow()" value="Delete Last Row" />
+					  --  
+					<input type="text" name="numAddRows" id="numAddRows">
+					<input type="button" onclick="addRows()" name="addRowsButton" id="addRowsButton" value="Add # of Rows">
+				</p>
+				<table>
+				  <tbody id="tableToModify">
+				    <tr class="lineItems">
+				      <td>Name: </td>
+				      <td><input type="text" name="empName" class="empName" value="Name"></td>
+				      <td>Hours: </td>
+				      <td><input type="number" name="empHours" class="empHours" value="0"></td>
+				    </tr>
+				  </tbody>
+				</table>
+
+				<p></p>
+
+				<table>
+					<tbody>
+						<tr>
+							<td>Total Amount of Tips: </td>
+							<td><input type="number" name="totalTips" id="totalTips" value="0"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="button" onclick="calcTips()" value="Calculate"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div id="output"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap JS -->
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
