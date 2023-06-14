@@ -1,11 +1,22 @@
-/*-------------------------*/
-/* DinoCalc 1.2
+/*-----------------------------------------------*/
+/* DinoCalc 1.3
 /* © copyright 2018
 /* Bruce McMurtrie Jr.
 /* all rights reserved
 /* www.BruceMcMurtrie.com
-/*-------------------------*/
+/*
+/* Todo:
+/*  Add database connect for saving entries
+/*-----------------------------------------------*/
 
+// Set DinoCalc version
+var dinoVersion = 1.3;
+
+// Print DinoCalc version
+$(".dinoVersion").text(dinoVersion);
+$("title").text("DinoCalc v" + dinoVersion + " | by Bruce McMurtrie Jr");
+
+// Main function for tip calculation
 function calcTips(){
   var nameArr = [];
   var hoursArr = [];
@@ -44,17 +55,17 @@ function calcTips(){
   // Print results
   document.getElementById("output").innerHTML += "<p><strong>Total Hours: " + hourTotal.toFixed(2) + "</strong></p>";
   document.getElementById("output").innerHTML += "<p><strong>Tips Per Hour: " + perHour.toFixed(2) + "</strong></p>";
-  document.getElementById("output").innerHTML += "********************";
+  document.getElementById("output").innerHTML += "*************************************";
   for (var i = 0; i < empHours.length; i++) {
     document.getElementById("output").innerHTML += "<p class=\"outputList\">" + nameArr[i] + " - $" + Math.floor(empTips[i]) + "</p>";
   }
 }
 
-// jQuery: on pressing Enter exec addRows()
-// then, clear the input
+// Pressing Enter executes addRows()
 $("#numAddRows").keypress(function(event){
   if(event.which === 13){
     addRows();
+    // then, clear the input
     $(this).val("");
     };
 });
@@ -68,25 +79,58 @@ function addRows(){
   }
 }
 
+// Set the reused column content
+var colDry = "<span class=\"addBelow\">+</span> <span class=\"removeRow\">-</span>";
+
+// Create the initial row
+createRow();
+
 // Create a row at the end of the table
 function createRow() {
-  var row = document.createElement('tr'); // create row node
-  var col = document.createElement('td'); // create column node
-  var col2 = document.createElement('td'); // create second column node
+  // create row node
+  var row = document.createElement('tr');
+  // create column nodes
+  var col = document.createElement('td');
+  var col2 = document.createElement('td');
   var col3 = document.createElement('td');
   var col4 = document.createElement('td');
-  row.appendChild(col); // append first column to row
-  row.appendChild(col2); // append second column to row
+  var col5 = document.createElement('td');
+  // append columns to row
+  row.appendChild(col);
+  row.appendChild(col2);
   row.appendChild(col3);
   row.appendChild(col4);
-  col.innerHTML = "Name: "; // put data in first column
-  col2.innerHTML = "<input type=\"text\" name=\"empName\" class=\"empName\" value=\"Name\">"; // put data in second column
+  row.appendChild(col5);
+  // put data in columns
+  col.innerHTML = "Name: ";
+  col2.innerHTML = "<input type=\"text\" name=\"empName\" class=\"empName\" placeholder=\"Name\">";
   col3.innerHTML = "Hours: ";
   col4.innerHTML = "<input type=\"number\" name=\"empHours\" class=\"empHours\" value=\"0\">";
-  var table = document.getElementById("tableToModify"); // find table to append to
+  col5.innerHTML = colDry;
+  // select table to append to
+  var table = document.getElementById("tableToModify");
   row.className = "lineItems";
-  table.appendChild(row); // append row to table
+  // append row to table
+  table.appendChild(row);
 }
+
+// Create row below the current row when '+' is clicked
+$("#tableToModify").on("click",".addBelow", function(){
+  var tr1 = "<tr class=\"lineItems\">";
+  var col = "<td>Name: </td>";
+  var col2 = "<td><input type=\"text\" name=\"empName\" class=\"empName\" placeholder=\"Name\"></td>";
+  var col3 = "<td>Hours: </td>";
+  var col4 = "<td><input type=\"number\" name=\"empHours\" class=\"empHours\" value=\"0\"></td>";
+  var col5 = "<td>" + colDry + "</td>";
+  var tr2 = "</tr>";
+  $(this).closest("tr").after(tr1 + col + col2 + col3 + col4 + col5 + tr2);
+})
+
+// Delete current row when '-' is clicked
+$("#tableToModify").on("click", ".removeRow", function(){
+  $(this).closest("tr").remove();
+  event.stopPropagation();
+})
 
 // Delete the last row in the table
 function deleteRow() {
@@ -96,9 +140,9 @@ function deleteRow() {
   }
 }
 
-// Highlight the title on mouse over
+// Select the DinoCalc title
 var dinoTitle = document.getElementById("title");
-
+// Highlight the title on mouse over
 dinoTitle.addEventListener("mouseover", function(){
   dinoTitle.classList.toggle("title");
 });
