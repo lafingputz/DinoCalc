@@ -10,7 +10,7 @@
 /*-----------------------------------------------*/
 
 // Set DinoCalc version
-let dinoVersion = 1.4;
+const dinoVersion = 1.4;
 
 // Print DinoCalc version
 $(".dinoVersion").text(dinoVersion);
@@ -18,14 +18,14 @@ $("title").text("DinoCalc v" + dinoVersion + " | by Bruce McMurtrie Jr");
 
 // Main function for tip calculation
 function calcTips() {
-  let nameArr = [];
-  let hoursArr = [];
-  let empName = document.querySelectorAll(".empName");
-  let empHours = document.querySelectorAll(".empHours");
+  const nameArr = [];
+  const hoursArr = [];
+  const empTips = [];
+  const empName = document.querySelectorAll(".empName");
+  const empHours = document.querySelectorAll(".empHours");
   let totalTips = Number(document.getElementById("totalTips").value);
   let hourTotal = 0;
   let perHour = 0;
-  let empTips = [];
 
   // Set the HTML of 'output' to nothing first thing
   // so the list doesn't add to itself
@@ -141,7 +141,7 @@ function deleteRow() {
 }
 
 // Select the DinoCalc title
-let dinoTitle = document.getElementById("title");
+const dinoTitle = document.getElementById("title");
 // Highlight the title on mouse over
 dinoTitle.addEventListener("mouseover", function () {
   dinoTitle.classList.toggle("title");
